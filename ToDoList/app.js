@@ -11,10 +11,16 @@ myList.addEventListener('click', (ev) => {
 // yeni element oluşturma
 function newElement() {
   const inputValue = document.getElementById('task').value;
-
+  const button = document.querySelector('#liveToastBtn');
+  const content = document.querySelector('.toast');
   // hata mesajı
-  if (!inputValue || inputValue.replace(/^\s+|\s+$/g, "").length === 0) {
-    $('.error').toast('show');
+  if (!inputValue || inputValue.length === 0) {
+    if(button) {
+      button.addEventListener('click', function(){
+        const toast = new bootstrap.Toast(content);
+        toast.show();
+      })
+    }
     // input alanını temizleme
     document.getElementById('task').value = '';
     return;
